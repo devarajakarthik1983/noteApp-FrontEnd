@@ -1,9 +1,10 @@
 import React , {Component} from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink ,Switch } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import CreatePost from '../CreatePost/CreatePost';
 import classes from './LoggedInLayout.css';
+import UpdatePost from '../UpdatePost/UpdatePost';
 
 class LoggedInLayout extends Component {
 
@@ -15,15 +16,18 @@ class LoggedInLayout extends Component {
                 <nav>
                     <ul>
                         <li><NavLink to="/" activeClassName='is-active' >My Posts</NavLink></li>
-                        <li><NavLink to="/create-post">Create Post</NavLink></li>
+                        <li><NavLink to="/create-note">Create Note</NavLink></li>
                     </ul>
                 </nav>
             </header>
             {/* <Route path="/" exact render={() => <h1>Home</h1>} />
             <Route path="/" render={() => <h1>Home 2</h1>} /> */}
+           <Switch>
+           <Route path="/" exact component={Posts} />
+            <Route path="/create-note" exact component={CreatePost} />
+            <Route path="/update-note" exact component={UpdatePost} />
+           </Switch>
            
-            <Route path="/" exact component={Posts} />
-            <Route path="/create-post" exact component={CreatePost} />
           
             
             

@@ -2,6 +2,10 @@ import React , {Component} from 'react';
 import axios from 'axios';
 import Post from '../../components/Post/Post';
 
+ 
+
+
+
 class Posts extends Component {
 
     state = {
@@ -13,7 +17,7 @@ class Posts extends Component {
       
         axios.get( 'http://localhost:3001/notes' )
             .then( response => {
-                console.log(response.data);
+                //console.log(response.data);
                 const posts = response.data;
                 this.setState({posts: posts});
                 
@@ -28,7 +32,11 @@ class Posts extends Component {
         this.fetchNotes();
     }
 
- 
+    updateNoteHandler=(id)=>{
+        localStorage.setItem('id', id)
+        this.props.history.push('/update-note');
+    }
+   
 
     render(){
 
@@ -43,6 +51,7 @@ class Posts extends Component {
                     text={post.text}
                     id={post._id}
                     fetchNotes={this.fetchNotes}
+                    edit={()=>this.updateNoteHandler(post._id)}
                   />;
             });
         }
