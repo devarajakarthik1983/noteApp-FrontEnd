@@ -10,6 +10,7 @@ class Posts extends Component {
     }
 
     fetchNotes = () =>{
+      
         axios.get( 'http://localhost:3001/notes' )
             .then( response => {
                 console.log(response.data);
@@ -37,7 +38,7 @@ class Posts extends Component {
         }else if (!this.state.error) {
             posts = this.state.posts.map(post => {
                 //console.log(post._id);
-                return <Post key={post.id} 
+                return <Post key={post._id} 
                     title={post.title} 
                     text={post.text}
                     id={post._id}
