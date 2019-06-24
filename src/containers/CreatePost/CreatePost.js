@@ -47,7 +47,7 @@ class CreatePost extends Component {
                         <br />
                         <button onClick={(event)=>this.postDataHandler(event)}>Submit Note</button>
                         {this.state.completed ? <p>Note added Successfully</p> : null}
-                        {this.state.error ? <p>Sorry unbale to add notes</p> : null}
+                        {this.state.error ? <p>Sorry unable to add notes</p> : null}
             </form>
                
             </div>

@@ -57,7 +57,7 @@ class Post extends Component {
                 console.log(e);
             })
         }}>Delete</button>
-        {this.state.error ? <p>Unbale to complete the note try again later</p> : null}
+        {this.state.error ? <p>Unable to complete the note try again later</p> : null}
         </article>
         );
     }
