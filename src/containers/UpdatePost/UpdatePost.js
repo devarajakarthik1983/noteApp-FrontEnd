@@ -49,6 +49,10 @@ class UpdatePost extends Component {
 
     }
     
+
+    cancelDataHandler =()=>{
+        this.props.history.push('/');
+    }
    
     render () {
         return (
@@ -61,6 +65,7 @@ class UpdatePost extends Component {
                         <br />
                         <br />
                         <button onClick={(event)=>this.postDataHandler(event)}>Update Note</button>
+                        <button onClick={this.cancelDataHandler}>Cancel</button>
                         {this.state.completed ? <p>Note updated Successfully</p> : null}
                         {this.state.error ? <p>Sorry unable to update notes.Try again later</p> : null}
             </form>
