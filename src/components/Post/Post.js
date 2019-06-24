@@ -12,7 +12,15 @@ class Post extends Component {
 
     render(){
         return(
-            <article className={classes.Post}>
+            <article className={classes.Post}><span style={{float:'right'}} onClick={()=>{
+                axios.delete('http://localhost:3001/notes/' + this.props.id)
+                .then(response=>{
+                    console.log(response.data);
+                    this.props.fetchNotes();
+                }).catch(e=>{
+                    console.log(e);
+                })
+            }}>x</span>
             <h3 style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.title}</h3>
             <p style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.text}</p>
             <button onClick={()=>{
