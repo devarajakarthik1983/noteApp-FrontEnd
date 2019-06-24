@@ -3,14 +3,13 @@ import axios from 'axios';
 import Post from '../../components/Post/Post';
 
  
-
-
-
 class Posts extends Component {
 
     state = {
         posts: [],
-        error: false
+        error: false,
+        strikeThrough:false
+      
     }
 
     fetchNotes = () =>{
@@ -32,15 +31,22 @@ class Posts extends Component {
         this.fetchNotes();
     }
 
-    updateNoteHandler=(id)=>{
-        localStorage.setItem('id', id)
-        this.props.history.push('/update-note');
-    }
    
+
+    completeHandler =()=>{
+        if(this.state.strikeThrough){
+            this.setState({strikeThrough:false})
+        }else{
+            this.setState({strikeThrough:true})
+        }
+        }
+
+
+
 
     render(){
 
-        let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+        let posts = <p>Something went wrong!</p>;
         if(this.state.posts.length === 0){
             posts =<p>Oops no post to show...</p>
         }else if (!this.state.error) {
@@ -51,7 +57,9 @@ class Posts extends Component {
                     text={post.text}
                     id={post._id}
                     fetchNotes={this.fetchNotes}
-                    edit={()=>this.updateNoteHandler(post._id)}
+                    edit={() => this.props.history.push(`${'/update-note/'}${post._id}`)}
+                    complete = {()=>this.completeHandler(post._id)}
+                    striked={this.state.strikeThrough}
                   />;
             });
         }

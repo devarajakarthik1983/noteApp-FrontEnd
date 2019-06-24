@@ -15,7 +15,8 @@ class UpdatePost extends Component {
     }
 
   componentDidMount() {
-    const id = localStorage.getItem('id');
+   
+    const id = this.props.match.params.id;
     axios.get('http://localhost:3001/notes/' + id)
         .then(response=>{
             this.setState({title:response.data.title});
@@ -28,7 +29,7 @@ class UpdatePost extends Component {
 
     postDataHandler =(event)=>{
         event.preventDefault();
-        const id = localStorage.getItem('id');
+        const id = this.props.match.params.id;
         const data = {
             title: this.state.title,
             text: this.state.text,

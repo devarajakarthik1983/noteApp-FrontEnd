@@ -8,11 +8,11 @@ import axios from 'axios';
 const post = (props) => {
     return(
         <article className={classes.Post}>
-        <h3>{props.title}</h3>
-        <p>{props.text}</p>
-        <button>Complete</button>
-       <button onClick={props.edit}>Edit</button>
-        <button 
+        <h3  style={{ textDecorationLine: props.striked ? 'line-through': null }}>{props.title}</h3>
+        <p style={{ textDecorationLine: props.striked ? 'line-through': null }}>{props.text}</p>
+        <button onClick={props.complete}>{props.striked ? 'Undo Complete' : 'Complete'}</button>
+       <button onClick={props.edit} disabled={props.striked} >Edit</button>
+        <button  
     onClick={()=>{
         axios.delete('http://localhost:3001/notes/' + props.id)
         .then(response=>{

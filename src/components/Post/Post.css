@@ -1,5 +1,5 @@
 .Post {
-    width: 300px;
+    width: 400px;
     padding: 16px;
     text-align: center;
     border: 1px solid #eee;
@@ -20,3 +20,4 @@
 .Post button {
     margin:12px;
 }
+

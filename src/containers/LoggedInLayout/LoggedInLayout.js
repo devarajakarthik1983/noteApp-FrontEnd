@@ -25,7 +25,7 @@ class LoggedInLayout extends Component {
            <Switch>
            <Route path="/" exact component={Posts} />
             <Route path="/create-note" exact component={CreatePost} />
-            <Route path="/update-note" exact component={UpdatePost} />
+            <Route path="/update-note/:id" exact component={UpdatePost} />
            </Switch>
            
           
