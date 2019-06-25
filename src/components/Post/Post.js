@@ -3,19 +3,29 @@ import classes from './Post.css';
 import axios from 'axios';
 
 
+
+
 class Post extends Component {
 
     state={
-        complete:false,
-        error:false
+        error:false,
+        complete:false
     }
 
+
+
     render(){
+
         return(
-            <article className={classes.Post}><span style={{float:'right'}} onClick={()=>{
+            <div>
+                
+                <article className={classes.Post}><span style={{float:'right'}} onClick={()=>{
                 axios.delete('http://localhost:3001/notes/' + this.props.id)
                 .then(response=>{
-                    console.log(response.data);
+                    //console.log(response.data);
+                   // console.log(complete);
+                    // complete[complete]='true'
+                    console.log(localStorage.getItem('complete'));
                     this.props.fetchNotes();
                 }).catch(e=>{
                     console.log(e);
@@ -25,10 +35,12 @@ class Post extends Component {
             <p style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.text}</p>
             <button onClick={()=>{
                 if(!this.state.complete){
+                    
                     axios.patch('http://localhost:3001/notes/' + this.props.id , {complete:true})
                     .then(response => {
                         console.log(response.data);
                         this.setState({complete:true})
+                        
                     })
                     .catch(e=>{
                         this.setState({error:true})
@@ -38,6 +50,7 @@ class Post extends Component {
                     .then(response => {
                         console.log(response.data);
                         this.setState({complete:false})
+                      
                     })
                     .catch(e=>{
                         this.setState({error:true})
@@ -45,7 +58,7 @@ class Post extends Component {
                 }
                 
                     
-            }}>{this.state.complete ? ' Undo Complete' :'Complete'}</button>
+            }}>{this.state.complete  ? ' Undo Complete' :'Complete'}</button>
            <button onClick={this.props.edit} disabled={this.state.complete}>Edit</button>
             <button  
         onClick={()=>{
@@ -59,6 +72,8 @@ class Post extends Component {
         }}>Delete</button>
         {this.state.error ? <p>Unable to complete the note try again later</p> : null}
         </article>
+            </div>
+            
         );
     }
 }

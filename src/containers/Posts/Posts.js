@@ -3,6 +3,7 @@ import axios from 'axios';
 
 
 import Post from '../../components/Post/Post';
+import classes from './Posts.css';
  
 class Posts extends Component {
 
@@ -32,6 +33,50 @@ class Posts extends Component {
 
   
 
+    sortOldestHandler =()=>{
+
+        axios.get( 'http://localhost:3001/notesoldest' )
+            .then( response => {
+              
+                const posts = response.data;
+                this.setState({posts: posts});
+               // this.fetchNotes();
+            } )
+            .catch(error => {
+               
+                this.setState({error: true});
+            });
+
+    }
+
+    sortByCompletedHandler =()=>{
+        axios.get( 'http://localhost:3001/notescompleted' )
+            .then( response => {
+              
+                const posts = response.data;
+                this.setState({posts: posts});
+               // this.fetchNotes();
+            } )
+            .catch(error => {
+               
+                this.setState({error: true});
+            });
+    }
+
+    sortByIncompleteHandler =(event)=>{
+        axios.get( 'http://localhost:3001/notesnotcomplete' )
+            .then( response => {
+              
+                const posts = response.data;
+                this.setState({posts: posts});
+               // this.fetchNotes();
+            } )
+            .catch(error => {
+               
+                this.setState({error: true});
+            });
+    }
+
 
     render(){
 
@@ -54,6 +99,14 @@ class Posts extends Component {
 
         return(
             <div>
+                <div className={classes.Posts}>
+                <ul>
+                     <li onClick={this.sortOldestHandler} style={{textDecoration:'underline' , cursor:'pointer'}}>Sort By Oldest Note</li>
+                     <li onClick={this.fetchNotes} style={{textDecoration:'underline' , cursor:'pointer'}}>Sort By Newest Note(Default)</li>
+                     <li onClick={this.sortByCompletedHandler} style={{textDecoration:'underline' , cursor:'pointer'}}>Sort By Completed Note</li>
+                     <li onClick={this.sortByIncompleteHandler} style={{textDecoration:'underline' , cursor:'pointer'}}>Sort By Open Note</li>
+                    </ul>
+                    </div>
                 {posts}
             </div>
         )

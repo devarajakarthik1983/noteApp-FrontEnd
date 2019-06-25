@@ -1,0 +1,37 @@
+.Posts ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: grey;
+    height:50px;
+  }
+  
+  .Posts li {
+    float: left;
+    margin: 20px 200px 20px 110px;
+    color:white;
+  }
+  
+  .Posts li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .Posts li a:hover {
+    background-color: #111;
+  }
+
+  .Posts li a:hover,
+    .Posts li a:active,
+    .Posts li a.active {
+        background-color: green;
+        border-bottom: 4px solid #40A4C8;
+        color: white;
+    }
+
+   
+      
