@@ -16,9 +16,10 @@ class Posts extends Component {
       
         axios.get( 'http://localhost:3001/notes' )
             .then( response => {
-              
+                //console.log(response.data.todo.complete);
                 const posts = response.data;
                 this.setState({posts: posts});
+                
                 
             } )
             .catch(error => {
@@ -80,17 +81,21 @@ class Posts extends Component {
 
     render(){
 
-        let posts = <p>Something went wrong!</p>;
-        if(this.state.posts.length === 0){
+        let posts =null;
+
+        if(this.state.error){
+            posts = <p>Something went wrong!</p>;
+        } else if(this.state.posts.length === 0){
             posts =<p>Oops no post to show...</p>
-        }else if (!this.state.error) {
+        }else {
             posts = this.state.posts.map(post => {
-              
+                
                 return <Post key={post._id} 
                     title={post.title} 
                     text={post.text}
                     id={post._id}
                     fetchNotes={this.fetchNotes}
+                    complete={post.complete}
                     edit={() => this.props.history.push(`${'/update-note/'}${post._id}`)}
                   />;
             });

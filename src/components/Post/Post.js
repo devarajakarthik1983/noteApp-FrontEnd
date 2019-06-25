@@ -9,10 +9,10 @@ class Post extends Component {
 
     state={
         error:false,
-        complete:false
+       
     }
 
-
+    //props.complete
 
     render(){
 
@@ -22,24 +22,27 @@ class Post extends Component {
                 <article className={classes.Post}><span style={{float:'right'}} onClick={()=>{
                 axios.delete('http://localhost:3001/notes/' + this.props.id)
                 .then(response=>{
-                    //console.log(response.data);
+                    //console.log(this.state.complete);
                    // console.log(complete);
                     // complete[complete]='true'
-                    console.log(localStorage.getItem('complete'));
+                   // console.log(localStorage.getItem('complete'));
                     this.props.fetchNotes();
                 }).catch(e=>{
                     console.log(e);
                 })
             }}>x</span>
-            <h3 style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.title}</h3>
-            <p style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.text}</p>
+            <h3 style={{ textDecorationLine: this.props.complete ? 'line-through': null }}>{this.props.title}</h3>
+            <p style={{ textDecorationLine: this.props.complete ? 'line-through': null }}>{this.props.text}</p>
 <button type="button" class="btn btn-success" onClick={()=>{
-                if(!this.state.complete){
+                if(!this.props.complete){
                     
                     axios.patch('http://localhost:3001/notes/' + this.props.id , {complete:true})
                     .then(response => {
-                        console.log(response.data);
-                        this.setState({complete:true})
+                        //console.log(response.data.complete);
+                        //this.setState({complete:true})
+
+                       console.log('success');
+                       window.location.reload();
                         
                     })
                     .catch(e=>{
@@ -48,8 +51,13 @@ class Post extends Component {
                 } else {
                     axios.patch('http://localhost:3001/notes/' + this.props.id , {complete:false})
                     .then(response => {
-                        console.log(response.data);
-                        this.setState({complete:false})
+                        //console.log(response.data);
+                        //this.setState({complete:false})
+
+                       console.log('success');
+                       window.location.reload();
+                        
+                      
                       
                     })
                     .catch(e=>{
@@ -58,7 +66,7 @@ class Post extends Component {
                 }
                 
                     
-            }}>{this.state.complete  ? ' UNDO COMPLETE' :'COMPLETE'}</button>
+            }}>{this.props.complete ? ' UNDO COMPLETE' :'COMPLETE'}</button>
 
            <button type="button" class="btn btn-warning" onClick={this.props.edit} disabled={this.state.complete}>EDIT</button>
         <button type="button" class="btn btn-danger"  onClick={()=>{
