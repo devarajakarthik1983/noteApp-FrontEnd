@@ -40,7 +40,7 @@ class UpdatePost extends Component {
                 //console.log(response);
                 this.setState({completed:true});
                 localStorage.removeItem('id');
-                this.props.history.push('/');
+                this.props.history.push('/myposts');
             })
             .catch(e=>{
                 //console.log(e);
@@ -51,7 +51,7 @@ class UpdatePost extends Component {
     
 
     cancelDataHandler =()=>{
-        this.props.history.push('/');
+        this.props.history.push('/myposts');
     }
    
     render () {

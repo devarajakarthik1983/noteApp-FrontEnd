@@ -1,8 +1,9 @@
 import React ,{Component} from 'react';
 import {BrowserRouter} from 'react-router-dom'
 
-import Posts from './containers/Posts/Posts';
-import LoggedInLayout from './containers/LoggedInLayout/LoggedInLayout';
+// import Posts from './containers/AllPostsComponent/Posts/Posts';
+// import LoggedInLayout from './containers/AllPostsComponent/LoggedInLayout/LoggedInLayout';
+import RegistrationLayout from './containers/AllRegistrationComponent/RegistrationLayout/RegistrationLayout';
 
 
 
@@ -11,16 +12,16 @@ class App extends Component {
     return(
       <BrowserRouter>
         <div>
-      <LoggedInLayout>
-      <Posts />
-      </LoggedInLayout>
-     
-    </div>
+          <RegistrationLayout />
+          {/* <LoggedInLayout>
+            <Posts />
+          </LoggedInLayout> */}
+      </div>
       </BrowserRouter>
       
     );
   }
 }
-
+ 
 
 export default App;

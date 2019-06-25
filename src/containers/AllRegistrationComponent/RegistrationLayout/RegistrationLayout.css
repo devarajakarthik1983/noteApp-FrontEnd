@@ -1,0 +1,23 @@
+.LoggedInLayout ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.LoggedInLayout li {
+    display: inline-block;
+    margin: 20px;
+    float:none;
+}
+
+.LoggedInLayout a {
+    text-decoration: none;
+    color: black;
+}
+
+.LoggedInLayout a:hover,
+.LoggedInLayout a:active {
+    color: #fa923f;
+}

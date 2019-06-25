@@ -68,7 +68,7 @@ class Post extends Component {
                     
             }}>{this.props.complete ? ' UNDO COMPLETE' :'COMPLETE'}</button>
 
-           <button type="button" class="btn btn-warning" onClick={this.props.edit} disabled={this.state.complete}>EDIT</button>
+           <button type="button" class="btn btn-warning" onClick={this.props.edit} disabled={this.props.complete}>EDIT</button>
         <button type="button" class="btn btn-danger"  onClick={()=>{
             axios.delete('http://localhost:3001/notes/' + this.props.id)
             .then(response=>{

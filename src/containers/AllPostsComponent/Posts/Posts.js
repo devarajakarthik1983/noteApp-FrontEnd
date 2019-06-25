@@ -2,7 +2,7 @@ import React , {Component} from 'react';
 import axios from 'axios';
 
 
-import Post from '../../components/Post/Post';
+import Post from '../Post/Post';
 import classes from './Posts.css';
  
 class Posts extends Component {
