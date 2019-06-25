@@ -33,7 +33,7 @@ class Post extends Component {
             }}>x</span>
             <h3 style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.title}</h3>
             <p style={{ textDecorationLine: this.state.complete ? 'line-through': null }}>{this.props.text}</p>
-            <button onClick={()=>{
+<button type="button" class="btn btn-success" onClick={()=>{
                 if(!this.state.complete){
                     
                     axios.patch('http://localhost:3001/notes/' + this.props.id , {complete:true})
@@ -58,10 +58,10 @@ class Post extends Component {
                 }
                 
                     
-            }}>{this.state.complete  ? ' Undo Complete' :'Complete'}</button>
-           <button onClick={this.props.edit} disabled={this.state.complete}>Edit</button>
-            <button  
-        onClick={()=>{
+            }}>{this.state.complete  ? ' UNDO COMPLETE' :'COMPLETE'}</button>
+
+           <button type="button" class="btn btn-warning" onClick={this.props.edit} disabled={this.state.complete}>EDIT</button>
+        <button type="button" class="btn btn-danger"  onClick={()=>{
             axios.delete('http://localhost:3001/notes/' + this.props.id)
             .then(response=>{
                 console.log(response.data);
@@ -69,7 +69,7 @@ class Post extends Component {
             }).catch(e=>{
                 console.log(e);
             })
-        }}>Delete</button>
+        }}>DELETE</button>
         {this.state.error ? <p>Unable to complete the note try again later</p> : null}
         </article>
             </div>
@@ -83,3 +83,9 @@ class Post extends Component {
 
 
 export default Post;
+
+
+
+
+
+

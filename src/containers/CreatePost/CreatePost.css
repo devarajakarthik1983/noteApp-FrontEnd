@@ -9,9 +9,15 @@
 }
 
 .CreatePost input {
-    width: 30%;
+    width: 90%;
     padding: 10px;
     box-sizing: border-box;
     margin: 20px;
-    
+      
 }
+
+
+.CreatePost button {
+    margin:20px;
+}
+

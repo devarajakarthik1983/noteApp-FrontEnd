@@ -33,23 +33,32 @@ class CreatePost extends Component {
             })
 
     }
+
+    cancelDataHandler =()=>{
+        this.props.history.push('/');
+    }
     
    
     render () {
         return (
             <div className={classes.CreatePost}>
-                <h4>Enter your Note</h4>
+                <h4><span class="label label-default">ENTER YOUR NOTE</span></h4><br/>
                 <form>
-                        <label><b>Enter Title:</b><input type="text" placeholder="Enter your Title..." onChange={(event)=>this.setState({title: event.target.value})} value={this.state.title}/></label>
+                        <label><b>Enter Title:</b><input type="text" placeholder="Enter your Title..." onChange={(event)=>this.setState({title: event.target.value})} 
+                        value={this.state.title} /></label>
                         <br />
-                        <label><b>Enter Text:</b> <br/><textarea type="text" placeholder="Enter your Text..."  rows="10" cols="50" onChange={(event)=>this.setState({text: event.target.value})} value={this.state.text}/></label>
+                        <label><b>Enter Text:</b> <br/><br/>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="80" type="text" placeholder="Enter your Text..."  
+                        onChange={(event)=>this.setState({text: event.target.value})} 
+                        value={this.state.text}></textarea>
+                        </label>
                         <br />
                         <br />
-                        <button onClick={(event)=>this.postDataHandler(event)}>Submit Note</button>
-                        {this.state.completed ? <p>Note added Successfully</p> : null}
-                        {this.state.error ? <p>Sorry unable to add notes</p> : null}
-            </form>
-               
+                        <button type="button" class="btn btn-danger"onClick={this.cancelDataHandler} >CANCEL</button>
+                        <button type="button" class="btn btn-success"onClick={(event)=>this.postDataHandler(event)} >SUBMIT NOTE</button>
+                        {this.state.completed ? <p style={{color:'green'}}>Note added Successfully</p> : null}
+                        {this.state.error ? <p style={{color:'red'}}>Sorry unable to add notes</p> : null}
+            </form>    
             </div>
         );
     }

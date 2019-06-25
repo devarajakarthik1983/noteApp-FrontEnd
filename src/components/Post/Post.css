@@ -9,6 +9,7 @@
     cursor: pointer;
     display: inline-block;
     background-color: lightcoral;
+    float:left
 }
 
 .Post:hover,

@@ -1,5 +1,5 @@
 .UpdatePost {
-    margin: 20px auto;
+    margin: 30px auto;
     width: 40%;
     text-align: center;
     box-shadow: 0 2px 3px #ccc;
@@ -9,11 +9,10 @@
 }
 
 .UpdatePost input {
-    width: 30%;
+    width: 90%;
     padding: 10px;
     box-sizing: border-box;
     margin: 20px;
-    
 }
 
 .UpdatePost button {
