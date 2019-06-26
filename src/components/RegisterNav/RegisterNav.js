@@ -11,7 +11,7 @@ const registerNav =(props)=>{
       <div className={classes.RegisterNav}>
         <ul>
        <label style={{color:'white', marginTop:'10px', fontSize:'25px', fontWeight:'bolder'}}>NoteApp</label>   
-       <li><NavLink  to="/contact-us" activeClassName='is-active' >Contact-Us</NavLink></li>
+       <li><NavLink  to="/contactus" activeClassName='is-active' >Contact-Us</NavLink></li>
       <li><NavLink  to="/register"  id="active">Registration</NavLink></li>
       <li><NavLink  to="/" activeClassName='is-active' >Login</NavLink></li>
       </ul>
