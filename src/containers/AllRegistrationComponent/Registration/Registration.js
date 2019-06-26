@@ -42,7 +42,7 @@ class Registration extends Component {
     render () {
         return (
             <div className={classes.Registration}>
-                <h4><span class="label label-default">LOGIN</span></h4><br/>
+                <h4><span class="label label-default">REGISTER</span></h4><br/>
                 <form>
                         <label><b>Enter Username:</b><input type="text" placeholder="Enter your Username..." onChange={(event)=>this.setState({title: event.target.value})} 
                         value={this.state.title} style={{width:'200px'}} /></label>

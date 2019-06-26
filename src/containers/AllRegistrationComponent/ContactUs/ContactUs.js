@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import classes from './ContactUs.css';
-// import axios from 'axios';
+ import axios from 'axios';
 
 
-//import axios from 'axios';
 
 class ContactUs extends Component {
 
     state = {
         fields: {},
         errors: {},
-        button:false
+        button:false,
+        completed:false,
+        error:false
        
     }
    
@@ -96,10 +97,29 @@ class ContactUs extends Component {
          feedback:this.state.fields.feedback
          }
 
-         console.log(feedback);
+         
+
+            axios.post('http://localhost:3001/feedback', feedback)
+            .then(response => {
+                console.log(response);
+                this.setState({completed:true});
+            })
+            .catch(e=>{
+                console.log(e);
+                this.setState({error:true});
+            })
+
+        setTimeout(()=>{
+            this.props.history.push('/');
+        }, 5000);
+
+        
+         
     }
 
 }
+
+
 
 handleChange(field, e){         
     let fields = this.state.fields;
@@ -112,6 +132,7 @@ handleChange(field, e){
         this.props.history.push('/');
     }
     
+
     //<p style={{color:'red'}}>{this.state.errors["firstname"]}</p>
    
     render () {
@@ -137,7 +158,7 @@ handleChange(field, e){
 
                         {/* Email field */}
                         <label style={{marginLeft:'20px'}}><b>Enter Email:</b><input type="Email" refs="email" placeholder="Enter Email.." onChange={this.handleChange.bind(this, "email")} 
-                        value={this.state.fields["email"]}  style={{ border: this.state.errors.email ? '2px solid red': null }}/></label>
+                        value={this.state.fields["email"]}  style={{ border: this.state.errors.email ? '2px solid red': null , width:'200px' }} id="email-id"/></label>
                         <label><b>Enter Your Feedback:</b> <br/><br/>
 
                          {/* Feedback field */}
@@ -149,8 +170,8 @@ handleChange(field, e){
                         <br />
                         <button type="button" class="btn btn-danger"onClick={this.cancelDataHandler} >CANCEL</button>
                         <button type="button" class="btn btn-success" onClick= {this.contactSubmit.bind(this)} >SUBMIT FEEDBACK</button>
-                        {this.state.completed ? <p style={{color:'green'}}>Note added Successfully</p> : null}
-                        {this.state.error ? <p style={{color:'red'}}>Sorry unable to add notes</p> : null}
+                        {this.state.completed ? <p style={{color:'green'}}>Feedback recieved and we acknowledged to your email.Site will redirect after 5 seconds</p> : null}
+                        {this.state.error ? <p style={{color:'red'}}>Sorry trouble in recieving feedback</p> : null}
 
 
 
