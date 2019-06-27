@@ -59,7 +59,8 @@ class UpdatePost extends Component {
             <div className={classes.UpdatePost}>
                  <h4><span class="label label-default">UPDATE YOUR NOTE</span></h4><br/>
                 <form>
-                        <label><b>Enter Title:</b><input type="text" placeholder="Update your Title..." onChange={(event)=>this.setState({title: event.target.value})} value={this.state.title}/></label>
+                        <label><b>Enter Title:</b><input type="text" placeholder="Update your Title..." onChange={(event)=>this.setState({title: event.target.value})} 
+                        value={this.state.title}/></label>
                         <br />
                         <label><b>Enter Text:</b><br/><br/>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="80" type="text" placeholder="Update your Text..."  
