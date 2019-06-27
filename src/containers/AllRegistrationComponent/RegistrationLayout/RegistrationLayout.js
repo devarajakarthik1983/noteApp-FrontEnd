@@ -7,6 +7,8 @@ import Login from '../Login/Login';
 import Registration from '../Registration/Registration';
 import LoggedInLayout from '../../AllPostsComponent/LoggedInLayout/LoggedInLayout';
 import ContactUs from '../ContactUs/ContactUs';
+import ActivateUser from '../ActivateUser/ActivateUser';
+
 
 class RegistrationLayout extends Component {
 
@@ -23,6 +25,7 @@ class RegistrationLayout extends Component {
             <Route path="/register" exact component={Registration} />
             <Route path="/user" exact component={LoggedInLayout} />
             <Route path="/contactus" exact component={ContactUs} />
+            <Route path='/newuser/:id/:id1' exact component={ActivateUser} />
             {/* <Route path="/create-note" exact component={CreatePost} />
             <Route path="/update-note/:id" exact component={UpdatePost} /> */}
            </Switch> 
