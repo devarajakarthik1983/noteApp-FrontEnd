@@ -38,6 +38,16 @@ class Login extends Component {
     cancelDataHandler =()=>{
         this.props.history.push('/');
     }
+
+
+    testHandler =()=>{
+        
+        this.props.history.push('/myposts');
+        localStorage.setItem('isAuth','logged');
+        localStorage.setItem('user','USERONE');
+        window.location.reload();
+        
+    }
     
    
     render () {
@@ -45,14 +55,14 @@ class Login extends Component {
             <div className={classes.Login}>
                 <h4><span class="label label-default">LOGIN</span></h4><br/>
                 <form>
-                        <label><b>Enter Username:</b><input type="text" placeholder="Enter your Email..." onChange={(event)=>this.setState({title: event.target.value})} 
+                        <label style={{marginLeft:'20px'}}><b>Enter Email:</b><input style={{width:'185px'}} type="text" placeholder="Enter your Email..." onChange={(event)=>this.setState({title: event.target.value})} 
                         value={this.state.title} /></label>
                         <br />
                         <label><b>Enter Password:</b><input type="text" placeholder="Enter your Password..." onChange={(event)=>this.setState({title: event.target.value})} 
                         value={this.state.title} /></label>
                         <br />
                         <br />
-                        <button type="button" style={{marginBottom:'0px', marginRight:'-20px'}} class="btn btn-success"onClick={(event)=>this.postDataHandler(event)} >Login</button><br/>
+                        <button type="button" style={{marginBottom:'0px', marginRight:'-20px'}} class="btn btn-success"onClick={this.testHandler} >Login</button><br/>
                         <NavLink  to="/forgotusername" style={{marginRight:'20px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Username</NavLink>
                         <a href="/" style={{marginRight:'-80px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Password</a>
                         {this.state.completed ? <p style={{color:'green'}}>Note added Successfully</p> : null}

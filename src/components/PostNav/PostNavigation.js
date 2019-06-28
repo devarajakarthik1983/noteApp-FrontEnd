@@ -1,48 +1,40 @@
-import React from 'react';
+import React ,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import classes from './PostNavigation.css';
 
 
 
 
-const postNavigation =(props)=>{
+class  postNavigation extends Component {
 
-    return (
+  logoutHandler =()=>{
+    localStorage.removeItem('isAuth');
+    localStorage.removeItem('user');
+  }
+
+  
+
+  render(){
+
+    return(
       <div className={classes.PostNavigation}>
+        
         <ul>
-       <label style={{color:'white', marginTop:'10px', fontSize:'25px', fontWeight:'bolder'}}>NoteApp</label>   
+       <label style={{color:'white', marginTop:'10px', fontSize:'25px', fontWeight:'bolder'}}>NoteApp</label>
+       <label style={{color:'orange', marginTop:'10px',marginLeft:'1325px', fontSize:'15px', fontWeight:'normal'}}>Hello: {localStorage.getItem('user')}</label>
+       <li><a href="/" onClick={this.logoutHandler}>Logout</a></li>   
+     
       <li><NavLink  to="/create-note"  id="active">Create Post</NavLink></li>
       <li><NavLink  to="/myposts" activeClassName='is-active' >My Posts</NavLink></li>
+      
       </ul>
       </div>
-      
-    );
+    )
+  }
 
 }
 
 
-
-
-
-
-    
-        // <div className={classes.PostNavigation}>
-        //     <header>
-        //         <nav>
-        //             <ul>
-        //                 <li><NavLink to="/" activeClassName='is-active' >My Posts</NavLink></li>
-        //                 <li><NavLink to="/create-note">Create Note</NavLink></li>
-        //             </ul>
-        //         </nav>
-        //     </header>
-        // </div>
-
-  
-        
-
-
-
-
-
+ 
 
 export default postNavigation;
