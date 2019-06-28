@@ -10,7 +10,8 @@ class ForgotUsername extends Component {
         errors: {},
         complete:false,
         error:false,
-        username:''
+        username:'',
+        
        
     }
    
@@ -52,21 +53,20 @@ class ForgotUsername extends Component {
 
     if(this.handleValidation()){
        //console.log('Form is Valid');
-       console.log(this.state.fields.email);
+       //console.log(this.state.fields.email);
        axios.get('http://localhost:3001/forgotusername/' + this.state.fields.email)
        .then(res=>{
-           console.log(!res.data);
+           //console.log(!res.data);
            if(!(res.data)){
                this.setState({error:true});
                this.setState({complete:false});
 
            }else {
-                   this.setState({username:res.data})
+                //console.log(res.data[0]);
+                   this.setState({username:res.data[0].username})
                     this.setState({complete:true});
                     this.setState({error:false});
            }
-           
-
          
        }).catch(e=>{
            console.log(e);
@@ -75,7 +75,7 @@ class ForgotUsername extends Component {
           
        })      
     }
-
+    
 }
 
 
@@ -87,19 +87,24 @@ handleChange(field, e){
 }
 
     render () {
+
+     
+
+        
         return (
             <div>
                 
                 <form>
                         {/* error display */}
                         <p style={{color:'red'}}>{this.state.errors["email"]}</p>
+                        {this.state.error ? <p style={{color:'red'}}>Username does not exist for that email</p> : null}
+                        {this.state.complete ? <p style={{color:'green'}}>Your Username: <span style={{color:'black'}}><b>{this.state.username}</b></span></p> : null}
                         {/* Email field */}
                         <label style={{marginLeft:'20px'}}><b>Enter Email:  </b><input type="Email" refs="email" placeholder="Enter Email.." onChange={this.handleChange.bind(this, "email")} 
                         value={this.state.fields["email"]}  style={{ border: this.state.errors.email ? '2px solid red': null , width:'200px', height:'35px' }} id="email-id"/></label>
-            
                         <button type="button" class="btn btn-success" onClick= {this.contactSubmit.bind(this)} style={{marginLeft:'10px',marginTop:'0' ,marginBottom:'2px'}}>Retrieve Username</button>
-                        {this.state.complete ? <p style={{color:'green'}}>Your Username: <b>{this.state.username}.</b></p> : null}
-                        {this.state.error ? <p style={{color:'red'}}>Username does not exist for that email</p> : null}
+                        
+                        
 
 
 

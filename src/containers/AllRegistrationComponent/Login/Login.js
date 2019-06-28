@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './Login.css';
 import axios from 'axios';
+import {NavLink} from 'react-router-dom'
 
 
 //import axios from 'axios';
@@ -51,7 +52,9 @@ class Login extends Component {
                         value={this.state.title} /></label>
                         <br />
                         <br />
-                        <button type="button" class="btn btn-success"onClick={(event)=>this.postDataHandler(event)} >Login</button>
+                        <button type="button" style={{marginBottom:'0px', marginRight:'-20px'}} class="btn btn-success"onClick={(event)=>this.postDataHandler(event)} >Login</button><br/>
+                        <NavLink  to="/forgotusername" style={{marginRight:'20px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Username</NavLink>
+                        <a href="/" style={{marginRight:'-80px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Password</a>
                         {this.state.completed ? <p style={{color:'green'}}>Note added Successfully</p> : null}
                         {this.state.error ? <p style={{color:'red'}}>Sorry unable to add notes</p> : null}
             </form>    

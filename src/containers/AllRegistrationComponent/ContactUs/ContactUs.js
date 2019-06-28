@@ -9,7 +9,6 @@ class ContactUs extends Component {
     state = {
         fields: {},
         errors: {},
-        button:false,
         completed:false,
         error:false
        
@@ -109,9 +108,9 @@ class ContactUs extends Component {
                 this.setState({error:true});
             })
 
-        setTimeout(()=>{
-            this.props.history.push('/');
-        }, 5000);
+        // setTimeout(()=>{
+        //     this.props.history.push('/');
+        // }, 5000);
 
         
          
@@ -132,8 +131,10 @@ handleChange(field, e){
         this.props.history.push('/');
     }
     
+    resetDataHandler = () =>{
+        window.location.reload();
+    }
 
-    //<p style={{color:'red'}}>{this.state.errors["firstname"]}</p>
    
     render () {
         return (
@@ -170,6 +171,7 @@ handleChange(field, e){
                         <br />
                         <button type="button" class="btn btn-danger"onClick={this.cancelDataHandler} >CANCEL</button>
                         <button type="button" class="btn btn-success" onClick= {this.contactSubmit.bind(this)} >SUBMIT FEEDBACK</button>
+                        <button type="button" class="btn btn-warning"onClick={this.resetDataHandler} >Reset Form</button>
                         {this.state.completed ? <p style={{color:'green'}}>Feedback recieved and we acknowledged to your email.Site will redirect after 5 seconds</p> : null}
                         {this.state.error ? <p style={{color:'red'}}>Sorry trouble in recieving feedback</p> : null}
 
