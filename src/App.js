@@ -12,7 +12,7 @@ class App extends Component {
  
 
   render(){
-    const logged = localStorage.getItem('isAuth') === 'logged';
+    const logged = localStorage.getItem('isAuth') ? true : false;
 
     return(
       <BrowserRouter>
@@ -23,7 +23,6 @@ class App extends Component {
           </LoggedInLayout> :null}
       </div>
       </BrowserRouter>
-      
     );
   }
 }

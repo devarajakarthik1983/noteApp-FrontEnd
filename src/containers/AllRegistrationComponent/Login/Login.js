@@ -1,72 +1,178 @@
 import React, { Component } from 'react';
 import classes from './Login.css';
-import axios from 'axios';
 import {NavLink} from 'react-router-dom'
+ import axios from 'axios';
 
 
-//import axios from 'axios';
 
 class Login extends Component {
 
-    state ={
-        title:'',
-        text:'',
+    state = {
+        fields: {},
+        errors: {},
         completed:false,
-        error:false
+        error:false,
+        inActive:false,
+        mismatch:false,
+        sendActiveLink:false,
+        noLink:false
+       
     }
+   
 
-    postDataHandler =(event)=>{
-        event.preventDefault();
-        const data = {
-            title: this.state.title,
-            text: this.state.text,
-            
-        };
-        axios.post('http://localhost:3001/notes', data)
+    handleValidation(){
+        let fields = this.state.fields;
+        let errors = {};
+        let formIsValid = true;
+        
+       
+
+          //Email
+        if(!fields["email"]){
+            formIsValid = false;
+            errors["email"] = "Email cannot be empty";
+         }
+ 
+         if(typeof fields["email"] !== "undefined"){
+            let lastAtPos = fields["email"].lastIndexOf('@');
+            let lastDotPos = fields["email"].lastIndexOf('.');
+ 
+            if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') === -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+               formIsValid = false;
+               errors["email"] = "Email is not valid";
+             }
+        } 
+
+       this.setState({errors: errors});
+       return formIsValid;
+   }
+
+
+
+   contactSubmit(e){
+    e.preventDefault();
+
+    if(this.handleValidation()){
+        const data ={
+            email:this.state.fields.email,
+            password: this.state.fields.password
+        }
+       
+        axios.post('http://localhost:3001/login', data)
             .then(response => {
-                console.log(response);
-                this.setState({completed:true});
-                this.setState({title:'' , text:''});
-                this.props.history.push('/');
+                if(response.data === 'Your account is not active. Please activate'){
+                    this.setState({inActive:true});
+                    this.setState({completed:false});
+                    this.setState({error:false});
+                    this.setState({mismatch:false});
+                    localStorage.setItem('email',this.state.fields.email);
+                   
+                }else if(response.data === 'Unable to login') {
+                    this.setState({inActive:false});
+                    this.setState({completed:false});
+                    this.setState({error:false});
+                    this.setState({mismatch:true});
+                }else{
+                    this.setState({inActive:false});
+                    this.setState({completed:true});
+                    this.setState({error:false});
+                    this.setState({mismatch:false});
+                   
+                    console.log(response.data.token);
+
+                    localStorage.setItem('isAuth' , response.data.token);
+                    localStorage.setItem('user', response.data.user.username)
+                    this.props.history.push('/myposts');
+                    window.location.reload();
+                    
+                }
+
+                
             })
             .catch(e=>{
+                console.log(e);
                 this.setState({error:true});
+                this.setState({completed:false});
+                this.setState({inActive:false});
+                this.setState({mismatch:false});
             })
-
+         
     }
 
-    cancelDataHandler =()=>{
-        this.props.history.push('/');
-    }
+}
 
 
-    testHandler =()=>{
+
+handleChange(field, e){         
+    let fields = this.state.fields;
+    fields[field] = e.target.value;        
+    this.setState({fields});
+}
+
+
+sendActiveLink =() =>{
+    axios.post('http://localhost:3001/sendactivelink/' + localStorage.getItem('email'))
+    .then(res=>{
+        console.log(res);
+        this.setState({sentNewlink: true});
+        this.setState({noLink:false});
+        this.setState({error:false});
+        this.setState({completed:false});
+        this.setState({mismatch:false});
+        localStorage.removeItem('email');
         
-        this.props.history.push('/myposts');
-        localStorage.setItem('isAuth','logged');
-        localStorage.setItem('user','USERONE');
-        window.location.reload();
         
-    }
-    
+    }).catch(e=>{
+        this.setState({noLink:true});
+        this.setState({sentNewlink: false});
+        this.setState({error:false});
+        this.setState({completed:false});
+        this.setState({mismatch:false});
+    })
+}
    
+
+
     render () {
         return (
             <div className={classes.Login}>
                 <h4><span class="label label-default">LOGIN</span></h4><br/>
                 <form>
-                        <label style={{marginLeft:'20px'}}><b>Enter Email:</b><input style={{width:'185px'}} type="text" placeholder="Enter your Email..." onChange={(event)=>this.setState({title: event.target.value})} 
-                        value={this.state.title} /></label>
+                        {/* error display */}
+                       
+                        <p style={{color:'red'}}>{this.state.errors["email"]}</p>
+                        {this.state.completed ? <p style={{color:'green'}}>Logged in successfully</p> : null}
+                        {this.state.error ? <p style={{color:'red'}}>Unable to Fetch Please try again later</p> : null}
+                        {this.state.inActive ? <p style={{color:'red'}}>Your account is inactive. Please activate your account</p> : null}
+                        {this.state.mismatch ? <p style={{color:'red'}}>Your account email or password is not correct</p> : null}
+                        {this.state.error ? <p style={{color:'red'}}>Unable to Fetch Please try again later</p> : null}
+                        {this.state.sendActiveLink ? <p style={{color:'green'}}>Email sent with new ink</p> : null}
+                        {this.state.noLink ? <p style={{color:'red'}}>Sorry unable to sent link</p> : null}
+
+
+                        {/* Email field */}
+                        <label style={{marginLeft:'20px'}}><b>Enter Email:</b><input type="Email" refs="email" placeholder="Enter Email.." 
+                        onChange={this.handleChange.bind(this, "email")} 
+                        value={this.state.fields["email"]}  style={{ border: this.state.errors.email ? '2px solid red': null , width:'200px' }} id="email-id"/></label>
                         <br />
-                        <label><b>Enter Password:</b><input type="text" placeholder="Enter your Password..." onChange={(event)=>this.setState({title: event.target.value})} 
-                        value={this.state.title} /></label>
+
+                         {/* Password field */}
+                         <label style={{marginLeft:'20px' ,marginRight:'45px'}}><b>Enter Password:</b><input type="password" refs="password" 
+                         placeholder="Enter Password.." onChange={this.handleChange.bind(this, "password")} 
+                        value={this.state.fields["password"]} style={{width:'210px'}} /></label>
                         <br />
-                        <br />
-                        <button type="button" style={{marginBottom:'0px', marginRight:'-20px'}} class="btn btn-success"onClick={this.testHandler} >Login</button><br/>
-                        <NavLink  to="/forgotusername" style={{marginRight:'20px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Username</NavLink>
-                        <a href="/" style={{marginRight:'-80px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Password</a>
-                        {this.state.completed ? <p style={{color:'green'}}>Note added Successfully</p> : null}
-                        {this.state.error ? <p style={{color:'red'}}>Sorry unable to add notes</p> : null}
+                        {this.state.inActive ?<NavLink to="/" style={{marginRight:'-80px' , fontSize:'12px', textDecoration:'underline'}} 
+                        onClick={this.sendActivelinkHandler} onClick={this.sendActiveLink}>Want a new user activation link?</NavLink> :null}<br />
+                        <button type="button" class="btn btn-success"  style={{marginRight:'-30px'}} onClick= {this.contactSubmit.bind(this)}  >Login</button><br/>
+                        <NavLink to="/forgotpassword" style={{marginRight:'-80px' , fontSize:'12px', textDecoration:'underline'}}>Forgot Password</NavLink>
+                       
+                     
+                       
+
+
+
+                     
+
             </form>    
             </div>
         );

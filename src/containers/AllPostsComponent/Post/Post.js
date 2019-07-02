@@ -20,6 +20,7 @@ class Post extends Component {
             <div>
                 
                 <article className={classes.Post}><span style={{float:'right'}} onClick={()=>{
+                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');    
                 axios.delete('http://localhost:3001/notes/' + this.props.id)
                 .then(response=>{
                     //console.log(this.state.complete);
@@ -35,7 +36,7 @@ class Post extends Component {
             <p style={{ textDecorationLine: this.props.complete ? 'line-through': null }}>{this.props.text}</p>
 <button type="button" class="btn btn-success" onClick={()=>{
                 if(!this.props.complete){
-                    
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
                     axios.patch('http://localhost:3001/notes/' + this.props.id , {complete:true})
                     .then(response => {
                         //console.log(response.data.complete);
@@ -49,6 +50,7 @@ class Post extends Component {
                         this.setState({error:true})
                     })
                 } else {
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
                     axios.patch('http://localhost:3001/notes/' + this.props.id , {complete:false})
                     .then(response => {
                         //console.log(response.data);
@@ -70,6 +72,7 @@ class Post extends Component {
 
            <button type="button" class="btn btn-warning" onClick={this.props.edit} disabled={this.props.complete}>EDIT</button>
         <button type="button" class="btn btn-danger"  onClick={()=>{
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
             axios.delete('http://localhost:3001/notes/' + this.props.id)
             .then(response=>{
                 console.log(response.data);

@@ -10,14 +10,13 @@ class ActivateUser extends Component {
     activateHandler=()=>{
         const id = this.props.match.params.id;
         const token =  this.props.match.params.id1;
-
-        if(!this.state.complete){
             axios.post('http://localhost:3001/newuser/' + id +'/' + token)
             .then(res=>{
                 console.log(res);
                 this.setState({complete:true});
 
                 setTimeout(()=>{
+                    this.setState({complete:false});
                     this.props.history.push('/');
                 },5000);
 
@@ -25,22 +24,12 @@ class ActivateUser extends Component {
                 console.log(e);
                 this.setState({error:true})
                 setTimeout(()=>{
+                    this.setState({complete:false});
+                    this.setState({error:false})
                     this.props.history.push('/');
                 },5000);
 
             })
-    
-        }else {
-            this.setState({error:true});
-            setTimeout(()=>{
-                this.props.history.push('/');
-            },5000);
-
-        }
-       
-       
-       
-
     }
 
     render() {

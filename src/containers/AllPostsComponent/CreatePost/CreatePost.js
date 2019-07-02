@@ -21,6 +21,7 @@ class CreatePost extends Component {
             text: this.state.text,
             
         };
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
         axios.post('http://localhost:3001/notes', data)
             .then(response => {
                 console.log(response);

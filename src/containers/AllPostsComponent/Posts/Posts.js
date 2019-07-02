@@ -13,7 +13,7 @@ class Posts extends Component {
     }
 
     fetchNotes = () =>{
-      
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
         axios.get( 'http://localhost:3001/notes' )
             .then( response => {
                 //console.log(response.data.todo.complete);
@@ -35,7 +35,7 @@ class Posts extends Component {
   
 
     sortOldestHandler =()=>{
-
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
         axios.get( 'http://localhost:3001/notesoldest' )
             .then( response => {
               
@@ -51,6 +51,7 @@ class Posts extends Component {
     }
 
     sortByCompletedHandler =()=>{
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
         axios.get( 'http://localhost:3001/notescompleted' )
             .then( response => {
               
@@ -65,6 +66,7 @@ class Posts extends Component {
     }
 
     sortByIncompleteHandler =(event)=>{
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
         axios.get( 'http://localhost:3001/notesnotcomplete' )
             .then( response => {
               

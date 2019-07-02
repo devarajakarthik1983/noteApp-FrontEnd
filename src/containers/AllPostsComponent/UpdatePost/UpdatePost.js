@@ -17,6 +17,7 @@ class UpdatePost extends Component {
   componentDidMount() {
    
     const id = this.props.match.params.id;
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
     axios.get('http://localhost:3001/notes/' + id)
         .then(response=>{
             this.setState({title:response.data.title});
@@ -35,6 +36,7 @@ class UpdatePost extends Component {
             text: this.state.text,
             
         };
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
         axios.patch('http://localhost:3001/notes/' + id ,data)
             .then(response => {
                 //console.log(response);

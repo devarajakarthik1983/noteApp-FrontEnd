@@ -1,15 +1,26 @@
 import React ,{Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import classes from './PostNavigation.css';
+import axios from 'axios';
 
 
 
 
 class  postNavigation extends Component {
-
-  logoutHandler =()=>{
-    localStorage.removeItem('isAuth');
-    localStorage.removeItem('user');
+//localStorage.getItem('isAuth');
+  logoutHandler =(event)=>{
+    event.preventDefault();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
+   axios.post('http://localhost:3001/logout')
+     .then(response=> {
+      console.log(response);
+      localStorage.removeItem('isAuth');
+      localStorage.removeItem('user');
+      window.location.replace("http://localhost:3000/");  
+     })
+     .catch(function (error) {
+       console.log(error)
+     })
   }
 
   
@@ -22,7 +33,7 @@ class  postNavigation extends Component {
         <ul>
        <label style={{color:'white', marginTop:'10px', fontSize:'25px', fontWeight:'bolder'}}>NoteApp</label>
        <label style={{color:'orange', marginTop:'10px',marginLeft:'1325px', fontSize:'15px', fontWeight:'normal'}}>Hello: {localStorage.getItem('user')}</label>
-       <li><a href="/" onClick={this.logoutHandler}>Logout</a></li>   
+       <li><a href="/" onClick={(event)=>this.logoutHandler(event)}>Logout</a></li>   
      
       <li><NavLink  to="/create-note"  id="active">Create Post</NavLink></li>
       <li><NavLink  to="/myposts" activeClassName='is-active' >My Posts</NavLink></li>
