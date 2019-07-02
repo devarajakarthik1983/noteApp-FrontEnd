@@ -14,7 +14,7 @@ class Login extends Component {
         error:false,
         inActive:false,
         mismatch:false,
-        sendActiveLink:false,
+        sentNewlink:false,
         noLink:false
        
     }
@@ -119,6 +119,7 @@ sendActiveLink =() =>{
         this.setState({error:false});
         this.setState({completed:false});
         this.setState({mismatch:false});
+        this.setState({inActive:false});
         localStorage.removeItem('email');
         
         
@@ -128,6 +129,7 @@ sendActiveLink =() =>{
         this.setState({error:false});
         this.setState({completed:false});
         this.setState({mismatch:false});
+        this.setState({inActive:false});
     })
 }
    
@@ -146,7 +148,7 @@ sendActiveLink =() =>{
                         {this.state.inActive ? <p style={{color:'red'}}>Your account is inactive. Please activate your account</p> : null}
                         {this.state.mismatch ? <p style={{color:'red'}}>Your account email or password is not correct</p> : null}
                         {this.state.error ? <p style={{color:'red'}}>Unable to Fetch Please try again later</p> : null}
-                        {this.state.sendActiveLink ? <p style={{color:'green'}}>Email sent with new ink</p> : null}
+                        {this.state.sentNewlink ? <p style={{color:'green'}}>Email sent with new ink</p> : null}
                         {this.state.noLink ? <p style={{color:'red'}}>Sorry unable to sent link</p> : null}
 
 
