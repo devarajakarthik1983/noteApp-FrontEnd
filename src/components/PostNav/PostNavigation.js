@@ -16,7 +16,7 @@ class  postNavigation extends Component {
       console.log(response);
       localStorage.removeItem('isAuth');
       localStorage.removeItem('user');
-      window.location.replace("http://localhost:3000/");  
+      window.location.replace("https://noteappfrontend.herokuapp.com/");  
      })
      .catch(function (error) {
        console.log(error)
