@@ -82,7 +82,7 @@ class PasswordActivation extends Component {
        
         console.log(data);
               
-            axios.post('http://localhost:3001/newpasswordentry/' + decodedEmail , data)
+            axios.post('https://noteappbackend.herokuapp.com/newpasswordentry/' + decodedEmail , data)
             .then(response => {
                
                 console.log(response.data);

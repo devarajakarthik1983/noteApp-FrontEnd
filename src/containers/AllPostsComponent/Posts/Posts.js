@@ -18,7 +18,7 @@ class Posts extends Component {
 
     fetchNotes = (pageNumber) =>{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-        axios.get( `http://localhost:3001/notes?page=${pageNumber}` )
+        axios.get( `https://noteappbackend.herokuapp.com/notes?page=${pageNumber}` )
             .then( response => {
                 //console.log(response.data.todo.complete);
                 const posts = response.data.notes;
@@ -46,7 +46,7 @@ class Posts extends Component {
 
     sortOldestHandler =(pageNumber)=>{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-        axios.get( `http://localhost:3001/notesoldest?page=${pageNumber}` )
+        axios.get( `https://noteappbackend.herokuapp.com/notesoldest?page=${pageNumber}` )
             .then( response => {
               
                 const posts = response.data.notes;
@@ -67,7 +67,7 @@ class Posts extends Component {
 
     sortByCompletedHandler =(pageNumber)=>{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-        axios.get( `http://localhost:3001/notescompleted?page=${pageNumber}` )
+        axios.get( `https://noteappbackend.herokuapp.com/notescompleted?page=${pageNumber}` )
             .then( response => {
               
                 const posts = response.data.notes;
@@ -87,7 +87,7 @@ class Posts extends Component {
 
     sortByIncompleteHandler =(pageNumber)=>{
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-        axios.get( `http://localhost:3001/notesnotcomplete?page=${pageNumber}` )
+        axios.get( `https://noteappbackend.herokuapp.com/notesnotcomplete?page=${pageNumber}` )
             .then( response => {
               
                 const posts = response.data.notes;

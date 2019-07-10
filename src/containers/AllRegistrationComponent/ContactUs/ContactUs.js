@@ -98,7 +98,7 @@ class ContactUs extends Component {
 
          
 
-            axios.post('http://localhost:3001/feedback', feedback)
+            axios.post('https://noteappbackend.herokuapp.com/feedback', feedback)
             .then(response => {
                 console.log(response);
                 this.setState({completed:true});

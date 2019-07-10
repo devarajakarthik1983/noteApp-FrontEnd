@@ -10,7 +10,7 @@ class ActivateUser extends Component {
     activateHandler=()=>{
         const id = this.props.match.params.id;
         const token =  this.props.match.params.id1;
-            axios.post('http://localhost:3001/newuser/' + id +'/' + token)
+            axios.post('https://noteappbackend.herokuapp.com/newuser/' + id +'/' + token)
             .then(res=>{
                 console.log(res);
                 this.setState({complete:true});

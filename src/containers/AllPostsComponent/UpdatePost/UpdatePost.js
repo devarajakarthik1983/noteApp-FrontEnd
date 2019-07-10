@@ -18,7 +18,7 @@ class UpdatePost extends Component {
    
     const id = this.props.match.params.id;
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-    axios.get('http://localhost:3001/notes/' + id)
+    axios.get('https://noteappbackend.herokuapp.com/notes/' + id)
         .then(response=>{
             this.setState({title:response.data.title});
                 this.setState({text:response.data.title});
@@ -37,7 +37,7 @@ class UpdatePost extends Component {
             
         };
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-        axios.patch('http://localhost:3001/notes/' + id ,data)
+        axios.patch('https://noteappbackend.herokuapp.com/notes/' + id ,data)
             .then(response => {
                 //console.log(response);
                 this.setState({completed:true});

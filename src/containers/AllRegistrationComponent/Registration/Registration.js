@@ -112,7 +112,7 @@ class Registration extends Component {
            }
 
          
-            axios.post('http://localhost:3001/register', user)
+            axios.post('https://noteappbackend.herokuapp.com/register', user)
             .then(response => {
                 if(response.data === 'user exist'){
                         this.setState({uniqueUser:true});
@@ -197,10 +197,6 @@ handleChange(field, e){
                         style={{ border: this.state.mismatchPassowrd ? '2px solid red': null }}/></label>
                         <p style={{marginRight:'-150px', fontSize:'10px' , color:'grey' ,marginTop:'0px'}}>Password should contain One uppercase,One<br/> Lowercase,
                         One Digit,One symbol and no space</p>
-
-
-                        
-
                         <br />
                         <br />
                         <button type="button" class="btn btn-success" onClick= {this.contactSubmit.bind(this)} >Register</button>

@@ -58,7 +58,7 @@ class Login extends Component {
             password: this.state.fields.password
         }
        
-        axios.post('http://localhost:3001/login', data)
+        axios.post('https://noteappbackend.herokuapp.com/login', data)
             .then(response => {
                 if(response.data === 'Your account is not active. Please activate'){
                     this.setState({inActive:true});
@@ -111,7 +111,7 @@ handleChange(field, e){
 
 
 sendActiveLink =() =>{
-    axios.post('http://localhost:3001/sendactivelink/' + localStorage.getItem('email'))
+    axios.post('https://noteappbackend.herokuapp.com/sendactivelink/' + localStorage.getItem('email'))
     .then(res=>{
         console.log(res);
         this.setState({sentNewlink: true});

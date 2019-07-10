@@ -11,7 +11,7 @@ class  postNavigation extends Component {
   logoutHandler =(event)=>{
     event.preventDefault();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isAuth');
-   axios.post('http://localhost:3001/logout')
+   axios.post('https://noteappbackend.herokuapp.com/logout')
      .then(response=> {
       console.log(response);
       localStorage.removeItem('isAuth');

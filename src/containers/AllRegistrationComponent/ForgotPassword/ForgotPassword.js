@@ -55,7 +55,7 @@ class ForgotPassword extends Component {
        //console.log('Form is Valid');
        //console.log(this.state.fields.email);
        
-       axios.post('http://localhost:3001/forgotpassword/' + this.state.fields.email)
+       axios.post('https://noteappbackend.herokuapp.com/forgotpassword/' + this.state.fields.email)
        .then(res=>{
            //console.log(!res.data);
            if(!(res.data)){

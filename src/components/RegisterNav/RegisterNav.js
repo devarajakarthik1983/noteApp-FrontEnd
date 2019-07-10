@@ -21,29 +21,4 @@ const registerNav =(props)=>{
 
 }
 
-
-
-
-
-
-    
-        // <div className={classes.PostNavigation}>
-        //     <header>
-        //         <nav>
-        //             <ul>
-        //                 <li><NavLink to="/" activeClassName='is-active' >My Posts</NavLink></li>
-        //                 <li><NavLink to="/create-note">Create Note</NavLink></li>
-        //             </ul>
-        //         </nav>
-        //     </header>
-        // </div>
-
-  
-        
-
-
-
-
-
-
 export default registerNav;
